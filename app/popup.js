@@ -14,7 +14,7 @@
       for (var i = 0; i < ad_slots.length; i++) {
         var ad_slot = document.createElement('div');
         ad_slot.className = 'ad_slot';
-        ad_slot.textContent = 'Position of Ad ' + ad_slots[i].ad_num + ': ' + ad_slots[i].ad_pos;
+        ad_slot.textContent = 'Ad #' + ad_slots[i].ad_num + ' appears in News Feed slot #' + ad_slots[i].ad_pos;
         link_feed.appendChild(ad_slot);
       }
     }
