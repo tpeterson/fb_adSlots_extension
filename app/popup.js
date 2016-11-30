@@ -1,11 +1,12 @@
 (function() {
   function setText(response) {
     var link_feed = document.getElementById('link_feed');
+    var explainer = document.getElementById('explainer');
 
     if (response === 'Not Facebook') {
-      link_feed.textContent = 'Visit Facebook to see ad insertion positions';
+      explainer.textContent = 'Visit Facebook to see ad insertion positions';
     } else if (!response || response.length === 0) {
-      link_feed.textContent = 'Reload Facebook to see ad slots';
+      explainer.textContent = 'Reload Facebook to see ad slots';
     } else {
       while (link_feed.firstChild) {
         link_feed.removeChild(link_feed.firstChild);
