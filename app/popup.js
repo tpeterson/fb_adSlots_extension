@@ -12,24 +12,28 @@
         link_feed.removeChild(link_feed.firstChild);
       }
 
-			var ad_slot_feed_el =  document.createElement('div');
+      var ad_slots = response;
+
+			var ad_slot_feed_el = document.createElement('div');
 			ad_slot_feed_el.id = 'ad_slot_feed';
 
-      var ad_slots = response;
-      for (var i = 0; i < ad_slots.length; i++) {
-				var ad_slot = document.createElement('div');
-        ad_slot.className = 'ad_slot';
-        ad_slot.textContent = 'Ad #' + ad_slots[i].ad_num + ' => News Feed slot #' + ad_slots[i].ad_pos;
-        ad_slot_feed_el.appendChild(ad_slot);
-      }
-
-			var post_ad_avg = (ad_slots[ad_slots.length-1].ad_pos)/ad_slots.length;
+			var post_ad_avg = (ad_slots[ad_slots.length - 1].ad_pos) / ad_slots.length;
 			var ad_avg_el = document.createElement('div');
 			ad_avg_el.className = 'ad_avg';
 			ad_avg_el.textContent = 'Organic posts per ad ratio: ' + post_ad_avg;
 
 			link_feed.appendChild(ad_avg_el);
 			link_feed.appendChild(ad_slot_feed_el);
+
+			ad_slots.forEach(function(entry) {
+				var ad_slot_el = document.createElement('div');
+				ad_slot_el.className = 'ad_slot';
+				ad_slot_el.textContent = 'Ad #' + entry.ad_num + ' => News Feed slot #' + entry.ad_pos;
+        ad_slot_feed_el.appendChild(ad_slot_el);
+				// setTimeout(() => {
+				// 	ad_slot_feed_el.appendChild(ad_slot_el);
+				// }, 150 * ad_slots.indexOf(entry));
+			});
     }
   }
 
