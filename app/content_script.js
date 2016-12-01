@@ -1,6 +1,6 @@
 function checkIfFacebook(url) {
   var link = parseUri(url);
-  if (link.host.includes('facebook.com')) {
+  if ((link.protocol === 'https') && link.host.includes('facebook.com')) {
     return true;
   } else {
     return false;
