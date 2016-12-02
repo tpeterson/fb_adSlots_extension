@@ -7,9 +7,9 @@ function checkIfFacebook(url) {
   }
 }
 
-function getLinks() {
+function getLinks(url) {
   var link = document.URL;
-  if (checkIfFacebook(link)) {
+  if (checkIfFacebook(url) && checkIfFacebook(link)) {
     return get_FbAdLinks();
   } else {
     return 'Not Facebook';
@@ -18,6 +18,26 @@ function getLinks() {
 
 chrome.runtime.onMessage.addListener(function(msg, sender, response) {
   if ((msg.from === 'popup') && (msg.subject === 'getLinks')) {
-    response(getLinks());
+    response(getLinks(msg.url));
   }
 });
+
+if (document.getElementById('mainContainer')) {
+  document.addEventListener('scroll', function() {
+    var links = getLinks(document.URL);
+    var num_links = (links !== 'Not Facebook') ? links.length.toString() : '0';
+    chrome.runtime.sendMessage({
+      from: 'content_script',
+      subject: 'postLinks',
+      info: links,
+      badge_num: num_links
+    });
+  });
+} else {
+  chrome.runtime.sendMessage({
+    from: 'content_script',
+    subject: 'postLinks',
+    info: [],
+    badge_num: '0'
+  });
+}

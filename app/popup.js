@@ -37,12 +37,14 @@
   function requestLinks() {
     chrome.tabs.query({
         active: true,
-        currentWindow: true
+        currentWindow: true,
+        lastFocusedWindow: true
       },
       function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {
           from: 'popup',
-          subject: 'getLinks'
+          subject: 'getLinks',
+          url: tabs[0].url
         }, setText);
       });
   }
@@ -54,4 +56,13 @@
   window.document.getElementById('get_links').addEventListener('click', function() {
     requestLinks();
   });
+
+  ////
+  //
+  // chrome.runtime.onMessage.addListener(function(msg, sender, response) {
+  //   if ((msg.from === 'content_script') && (msg.subject === 'hereLinks')) {
+  //     setText(msg.info);
+  //   }
+  // });
+
 })();
