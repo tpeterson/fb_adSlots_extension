@@ -3,10 +3,10 @@
     var link_feed = document.getElementById('link_feed');
     var explainer = document.getElementById('explainer');
 
-    if (response === 'Not Facebook') {
+    if (!response || response === 'Not Facebook') {
       explainer.textContent = 'Visit Facebook to see ad insertion positions';
-    } else if (!response || response.length === 0) {
-      explainer.textContent = 'No ads loaded yet';
+    } else if (response.length === 0) {
+      explainer.textContent = 'No ads yet';
     } else {
       while (link_feed.firstChild) {
         link_feed.removeChild(link_feed.firstChild);
@@ -56,13 +56,4 @@
   window.document.getElementById('get_links').addEventListener('click', function() {
     requestLinks();
   });
-
-  ////
-  //
-  // chrome.runtime.onMessage.addListener(function(msg, sender, response) {
-  //   if ((msg.from === 'content_script') && (msg.subject === 'hereLinks')) {
-  //     setText(msg.info);
-  //   }
-  // });
-
 })();
