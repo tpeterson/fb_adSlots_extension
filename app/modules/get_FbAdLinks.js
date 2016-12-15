@@ -12,7 +12,7 @@ function get_FbAdLinks() {
       };
       ad_positions.push(ad_info);
     } else {
-      return ad_positions;
+      return ad_positions; // MAY NOT NEED ELSE STATEMENT
     }
   }
   return ad_positions;

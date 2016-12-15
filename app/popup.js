@@ -3,7 +3,7 @@
     var link_feed = document.getElementById('link_feed');
     var explainer = document.getElementById('explainer');
 
-    if (!response || response === 'Not Facebook') {
+    if ( !response || (response === 'Not Facebook') ) {
       explainer.textContent = 'Visit Facebook to see ad insertion positions';
     } else if (response.length === 0) {
       explainer.textContent = 'No ads yet';

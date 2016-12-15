@@ -1,0 +1,26 @@
+{
+  "name": "fb_ad_slots_extension",
+  "version": "1.0.0",
+  "description": "Chrome Extension to identify ad placements in Facebook desktop news feed.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tpeterson/fb_adSlots_extension.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tpeterson/fb_adSlots_extension/issues"
+  },
+  "homepage": "https://github.com/tpeterson/fb_adSlots_extension#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
