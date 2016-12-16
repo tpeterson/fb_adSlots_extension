@@ -1,9 +1,13 @@
+'use strict';
+
 function get_FbAdLinks() {
   var sponsored_links = document.querySelectorAll('a.uiStreamSponsoredLink');
   var ad_positions = [];
 
   for (var i = 0; i < sponsored_links.length; i++) {
-    var parsed_link = parseUri(sponsored_links[i]);
+    var cleaned_link = sponsored_links[i].getAttribute('href');
+    var parsed_link = parseUri(cleaned_link);
+    //var parsed_link = parseUri(sponsored_links[i]);
     if ((parsed_link.queryKey['ft[fbfeed_location]'] === '1') && parsed_link.queryKey['ft[insertion_position]']) {
       var insertion_position = parsed_link.queryKey['ft[insertion_position]'];
       var ad_info = {

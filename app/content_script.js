@@ -1,3 +1,5 @@
+'use strict';
+
 function checkIfFacebook(url) {
   var link = parseUri(url);
   if ((link.protocol === 'https') && link.host.includes('facebook.com')) {

@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
   function setText(response) {
     var link_feed = document.getElementById('link_feed');

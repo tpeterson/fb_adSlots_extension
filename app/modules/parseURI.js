@@ -1,3 +1,5 @@
+'use strict';
+
 function parseUri(str) {
   var o = parseUri.options,
     m = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
@@ -26,3 +28,5 @@ parseUri.options = {
     loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
   }
 };
+
+module.exports = parseUri;
