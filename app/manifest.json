@@ -10,11 +10,11 @@
     "https://www.facebook.com/*"
   ],
   "browser_action": {
-    "default_icon": "icon_19.png",
-    "default_popup": "popup.html"
+    "default_icon": "/icons/icon_19.png",
+    "default_popup": "/popup/popup.html"
   },
   "icons": {
-    "128": "icon_128.png"
+    "128": "/icons/icon_128.png"
   },
   "background": {
     "scripts": ["background.js"],

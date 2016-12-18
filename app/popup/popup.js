@@ -8,7 +8,7 @@
     if ( !response || (response === 'Not Facebook') ) {
       explainer.textContent = 'Visit Facebook to see ad insertion positions';
     } else if (response.length === 0) {
-      explainer.textContent = 'No ads yet';
+      explainer.textContent = 'Scroll down or reload Facebook to see ad positions.';
     } else {
       while (link_feed.firstChild) {
         link_feed.removeChild(link_feed.firstChild);
