@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect;
-const parseUri = require('../app/modules/parseURI');
+const parseUri = require('./parseURI');
 
 const example_links = [
   '<a class="uiStreamSponsoredLink" href="https://www.facebook.com/ads/about?ft[tn]=j&ft[qid]=6364488140059654796&ft[mf_story_key]=5062276217861793575&ft[ei]=AI%40d1fa6e8cfedf25ad6f420a0c17fec125&ft[top_level_post_id]=1630401810321511&ft[fbfeed_location]=1&ft[insertion_position]=28&__md__=0" onmousedown="this.href = this.href.replace(\'__md__=0\', \'__md__=1\');">Sponsored</a>',
@@ -14,6 +14,14 @@ describe('Link parser', function() {
   it('can pick out the href attribute', function() {
     let parsed_link = parseUri(example_links[0]);
     expect(parsed_link.host).to.equal('www.facebook.com');
+  });
+
+  it('can convert to array then parse', function() {
+    let filtered_links = Array.from(example_links).filter(function(link) {
+      let query = parseUri(link);
+      return query.queryKey['amp;ft[fbfeed_location]'] === '1';
+    });
+    expect(filtered_links.length).to.equal(3);
   });
 });
 
