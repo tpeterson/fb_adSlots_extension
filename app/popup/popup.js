@@ -7,7 +7,7 @@
 
     if ( !response || (response === 'Not Facebook') ) {
       explainer.textContent = 'Visit Facebook to see ad insertion positions';
-    } else if (response.length === 0) {
+    } else if (response.ads.length === 0) {
       explainer.textContent = 'Scroll down or reload Facebook to see ad positions.';
     } else {
       while (link_feed.firstChild) {
@@ -18,7 +18,7 @@
       var post_ad_avg_text = (post_ad_avg !== 1) ? post_ad_avg + ' organic posts' : post_ad_avg + ' organic post';
       var ad_avg_el = document.createElement('div');
       ad_avg_el.className = 'ad_avg';
-      ad_avg_el.textContent = '1 ad for every ' + post_ad_avg_text;
+      ad_avg_el.textContent = (post_ad_avg !== 'NaN organic posts') ? '1 ad for every ' + post_ad_avg_text : 'No ads loaded yet';
       link_feed.appendChild(ad_avg_el);
 
       var ad_slots = response.ads;

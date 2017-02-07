@@ -13,7 +13,8 @@ function get_FbAdLinks() {
     // PARSE LINK WITH FEED PLACEMENT INFO
     let parsed_ad = parseUri(post_info.href);
     // PULL INFO ON ADVERTISER NAME AND FEED PLACEMENT
-    let ad_obj = processAd(parsed_ad);
+    let advertiser_name = post.querySelector('span.fwb.fcg a').textContent;
+    let ad_obj = processAd(parsed_ad, advertiser_name);
     return ad_obj;
   });
 
@@ -25,9 +26,9 @@ function get_FbAdLinks() {
   return feed_info;
 }
 
-function processAd(ad) {
+function processAd(ad, advertiser) {
   const ad_obj = {
-    advertiser: ad.directory.replace(/\//g, ''),
+    advertiser: advertiser,
     isPlaced: ad.queryKey.hasOwnProperty('ft[insertion_position]'),
     placement: (ad.queryKey['ft[insertion_position]']) ? parseInt(ad.queryKey['ft[insertion_position]'], 10) + 1 : 0
   }
