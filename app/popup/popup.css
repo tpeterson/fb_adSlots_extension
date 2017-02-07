@@ -2,23 +2,23 @@ body {
   width: 250px;
   height: 400px;
   margin: 0;
-  background-color: #ffffff;
+  background-color: #00385B;
   font-size: 16px;
-  font-family: "Helvetica Neue", "Lucida Grande", sans-serif; }
+  font-family: "Futura", "Helvetica Neue", "Lucida Grande", sans-serif; }
 
 #header {
   width: 100%;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  background-color: #FC4A4A;
+  background-color: #FF8080;
   text-align: center;
-  font-size: 1.125em;
+  font-size: 1.25em;
   color: #ffffff; }
 
 button#get_links {
   display: block;
   margin: 1em auto;
-  background: #FC4A4A;
+  background: #FF8080;
   border: 0;
   font-size: 0.9em;
   font-weight: bold;
@@ -26,24 +26,25 @@ button#get_links {
 
 button#get_links:hover {
   background: #ffffff;
-  color: #FC4A4A;
-  border: 1px solid #FC4A4A; }
+  color: #FF8080;
+  border: 2px solid #FF8080; }
 
 #link_feed {
   display: block; }
 
 .ad_slot {
   margin: 0.5em 0.625em;
-  border: 1px solid #FC4A4A;
+  border: 2px solid #FF8080;
+  background-color: #00385B;
   text-align: center;
   font-size: 1em;
-  color: #FC4A4A; }
+  color: #ffffff; }
 
 #explainer, .ad_avg {
-  margin-top: 0.5em;
+  margin: 0.5em 0.25em 0em 0.25em;
+  background-color: #80FFFA;
   text-align: center;
   font-size: 1em;
-  font-weight: bold;
-  color: #FC4A4A; }
+  color: #00385B; }
 
 /*# sourceMappingURL=popup.css.map */

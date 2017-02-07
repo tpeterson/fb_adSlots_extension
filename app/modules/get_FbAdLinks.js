@@ -8,7 +8,7 @@ function get_FbAdLinks() {
   });
 
   var ads_arr = ad_posts.map(function(post) {
-    post.style.border = '4px solid blue';
+    post.style.border = '4px solid #FF8080';
     let post_info = post.querySelector('a._5pb8._8o._8s.lfloat._ohe');
     // PARSE LINK WITH FEED PLACEMENT INFO
     let parsed_ad = parseUri(post_info.href);

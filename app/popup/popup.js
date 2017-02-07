@@ -15,7 +15,7 @@
       }
 
       var post_ad_avg = Math.round((response.num_posts - response.ads.length) / response.ads.length);
-      var post_ad_avg_text = post_ad_avg !== 1 ? post_ad_avg + ' organic posts' : post_ad_avg + ' organic post';
+      var post_ad_avg_text = (post_ad_avg !== 1) ? post_ad_avg + ' organic posts' : post_ad_avg + ' organic post';
       var ad_avg_el = document.createElement('div');
       ad_avg_el.className = 'ad_avg';
       ad_avg_el.textContent = '1 ad for every ' + post_ad_avg_text;
