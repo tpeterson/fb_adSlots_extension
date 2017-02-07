@@ -1,49 +1,59 @@
+$primary_color: #FC4A4A;
+$secondary_color: #ffffff;
+$bg_color: #ffffff;
+
+
 body {
   width: 250px;
   height: 400px;
   margin: 0;
-  background-color: #ffffff;
+  background-color: $bg_color;
   font-size: 16px;
-  font-family: "Helvetica Neue", "Lucida Grande", sans-serif; }
+  font-family: "Helvetica Neue", "Lucida Grande", sans-serif;
+}
 
 #header {
   width: 100%;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  background-color: #FC4A4A;
+  background-color: $primary_color;
   text-align: center;
   font-size: 1.125em;
-  color: #ffffff; }
+  color: $secondary_color;
+}
 
 button#get_links {
   display: block;
   margin: 1em auto;
-  background: #FC4A4A;
+  background: $primary_color;
   border: 0;
   font-size: 0.9em;
   font-weight: bold;
-  color: #ffffff; }
+  color: $secondary_color;
+}
 
 button#get_links:hover {
-  background: #ffffff;
-  color: #FC4A4A;
-  border: 1px solid #FC4A4A; }
+  background: $secondary_color;
+  color: $primary_color;
+  border: 1px solid $primary_color;
+}
 
 #link_feed {
-  display: block; }
+  display: block;
+}
 
 .ad_slot {
   margin: 0.5em 0.625em;
-  border: 1px solid #FC4A4A;
+  border: 1px solid $primary_color;
   text-align: center;
   font-size: 1em;
-  color: #FC4A4A; }
+  color: $primary_color;
+}
 
 #explainer, .ad_avg {
   margin-top: 0.5em;
   text-align: center;
   font-size: 1em;
   font-weight: bold;
-  color: #FC4A4A; }
-
-/*# sourceMappingURL=popup.css.map */
+  color: $primary_color;
+}
