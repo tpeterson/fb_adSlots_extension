@@ -26,13 +26,13 @@ chrome.runtime.onMessage.addListener(function(msg, sender, response) {
 
 if (document.getElementById('mainContainer')) {
   document.addEventListener('scroll', function() {
-    var links = getLinks(document.URL);
-    var num_links = (links !== 'Not Facebook') ? links.length.toString() : '0';
+    var feed_info = getLinks(document.URL);
+    var num_ads = (feed_info !== 'Not Facebook') ? feed_info.ads.length.toString() : '0';
     chrome.runtime.sendMessage({
       from: 'content_script',
       subject: 'postLinks',
-      info: links,
-      badge_num: num_links
+      info: feed_info,
+      badge_num: num_ads
     });
   });
 } else {

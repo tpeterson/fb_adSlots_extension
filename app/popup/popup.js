@@ -14,23 +14,21 @@
         link_feed.removeChild(link_feed.firstChild);
       }
 
-      var ad_slots = response;
-
-      var ad_slot_feed_el = document.createElement('div');
-      ad_slot_feed_el.id = 'ad_slot_feed';
-
-      var post_ad_avg = Math.round(((ad_slots[ad_slots.length - 1].ad_pos) - ad_slots.length) / ad_slots.length);
+      var post_ad_avg = Math.round(response.num_posts / response.ads.length);
       var ad_avg_el = document.createElement('div');
       ad_avg_el.className = 'ad_avg';
-      ad_avg_el.textContent = 'Organic posts per ad ratio: ' + post_ad_avg;
-
+      ad_avg_el.textContent = 'Organic posts per ad: ' + post_ad_avg;
       link_feed.appendChild(ad_avg_el);
+
+      var ad_slots = response.ads;
+      var ad_slot_feed_el = document.createElement('div');
+      ad_slot_feed_el.id = 'ad_slot_feed';
       link_feed.appendChild(ad_slot_feed_el);
 
       ad_slots.forEach(function(entry) {
         var ad_slot_el = document.createElement('div');
         ad_slot_el.className = 'ad_slot';
-        ad_slot_el.textContent = 'Ad #' + entry.ad_num + ' => News Feed slot #' + entry.ad_pos;
+        ad_slot_el.textContent = entry.advertiser + ' ad ' + (entry.isPlaced ? 'in slot #' + entry.placement : 'isn\'t placed yet');
         ad_slot_feed_el.appendChild(ad_slot_el);
       });
     }
