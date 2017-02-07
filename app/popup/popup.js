@@ -50,11 +50,11 @@
       });
   }
 
-  window.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     requestLinks();
   });
 
-  window.document.getElementById('get_links').addEventListener('click', function() {
+  document.getElementById('get_links').addEventListener('click', function() {
     requestLinks();
   });
 })();
