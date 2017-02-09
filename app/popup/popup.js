@@ -32,6 +32,13 @@
         ad_slot_el.textContent = 'Ad from ' + entry.advertiser + (entry.isPlaced ? ' in slot #' + entry.placement : ' isn\'t placed yet');
         ad_slot_feed_el.appendChild(ad_slot_el);
       });
+
+      if (response.ads.length > 1) {
+        var submit_button = document.createElement('button');
+        submit_button.className = 'btn';
+        submit_button.textContent = 'Send';
+        link_feed.appendChild(submit_button);
+      }
     }
   }
 
@@ -49,7 +56,7 @@
         }, setText);
       });
   }
-  
+
   document.addEventListener('readystatechange', function() {
     requestLinks();
   });

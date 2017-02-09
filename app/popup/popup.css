@@ -15,7 +15,7 @@ body {
   font-size: 1.25em;
   color: #ffffff; }
 
-button#get_links {
+button.btn {
   display: block;
   margin: 1em auto;
   background: #FF8080;
@@ -24,7 +24,7 @@ button#get_links {
   font-weight: bold;
   color: #ffffff; }
 
-button#get_links:hover {
+button.btn:hover {
   background: #ffffff;
   color: #FF8080;
   border: 2px solid #FF8080; }
