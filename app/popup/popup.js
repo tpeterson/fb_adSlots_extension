@@ -49,8 +49,8 @@
         }, setText);
       });
   }
-
-  document.addEventListener('DOMContentLoaded', function() {
+  
+  document.addEventListener('readystatechange', function() {
     requestLinks();
   });
 
