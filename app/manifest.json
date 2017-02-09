@@ -7,7 +7,8 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "https://www.facebook.com/*"
+    "https://www.facebook.com/*",
+    "cookies"
   ],
   "browser_action": {
     "default_icon": "/icons/icon_19.png",

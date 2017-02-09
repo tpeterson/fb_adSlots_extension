@@ -13,7 +13,7 @@ function get_FbAdLinks() {
     // PARSE LINK WITH FEED PLACEMENT INFO
     let parsed_ad = parseUri(post_info.href);
     // PULL INFO ON ADVERTISER NAME AND FEED PLACEMENT
-    let advertiser_name = (post.querySelector('span.fwb.fcg a').textContent) ? post.querySelector('span.fwb.fcg a').textContent : '';
+    let advertiser_name = (post.querySelector('span.fwb.fcg a')) ? post.querySelector('span.fwb.fcg a').textContent : '';
     let ad_obj = processAd(parsed_ad, advertiser_name);
     return ad_obj;
   });

@@ -29,16 +29,32 @@
       ad_slots.forEach(function(entry) {
         var ad_slot_el = document.createElement('div');
         ad_slot_el.className = 'ad_slot';
-        ad_slot_el.textContent = 'Ad from ' + entry.advertiser + (entry.isPlaced ? ' in slot #' + entry.placement : ' isn\'t placed yet');
+        ad_slot_el.textContent = 'Ad ' + ((entry.advertiser.length > 0) ? 'from ' + entry.advertiser : '') + (entry.isPlaced ? ' in slot #' + entry.placement : ' isn\'t placed yet');
         ad_slot_feed_el.appendChild(ad_slot_el);
       });
 
-      if (response.ads.length > 1) {
-        var submit_button = document.createElement('button');
-        submit_button.className = 'btn';
-        submit_button.textContent = 'Send';
-        link_feed.appendChild(submit_button);
-      }
+      chrome.cookies.get({url: 'https://www.facebook.com', name: 'popup'}, function(cookies) {
+        document.getElementById('cookies').textContent = 'Cookie val: ' + parseInt(cookies.value, 10);
+        if (cookies.value) {
+          if (response.ads.length > 1) {
+            var cookies_num = parseInt(cookies.value, 10);
+            if (response.ads.length > cookies_num) {
+              var submit_button = document.createElement('button');
+              submit_button.className = 'btn';
+              submit_button.textContent = 'Send';
+              link_feed.appendChild(submit_button);
+              submit_button.addEventListener('click', function() {
+                chrome.cookies.set({url: 'https://www.facebook.com', name: 'popup', value:response.ads.length.toString()});
+                link_feed.removeChild(submit_button);
+              });
+            }
+          } else {
+            chrome.cookies.set({url: 'https://www.facebook.com', name: 'popup', value:response.ads.length.toString()});
+          }
+        } else {
+          chrome.cookies.set({url: 'https://www.facebook.com', name: 'popup', value:response.ads.length.toString()});
+        }
+      });
     }
   }
 
@@ -57,7 +73,7 @@
       });
   }
 
-  document.addEventListener('readystatechange', function() {
+  document.addEventListener('load', function() {
     requestLinks();
   });
 
