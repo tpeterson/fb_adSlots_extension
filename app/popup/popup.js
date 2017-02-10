@@ -5,7 +5,7 @@
     var link_feed = document.getElementById('link_feed');
     var explainer = document.getElementById('explainer');
 
-    if ( !response || (response === 'Not Facebook') ) {
+    if (!response || (response === 'Not Facebook')) {
       explainer.textContent = 'Visit Facebook to see ad insertion positions';
     } else if (response.ads.length === 0) {
       explainer.textContent = 'Scroll down or reload Facebook to see ad positions.';
@@ -33,28 +33,24 @@
         ad_slot_feed_el.appendChild(ad_slot_el);
       });
 
-      chrome.cookies.get({url: 'https://www.facebook.com', name: 'popup'}, function(cookies) {
-        document.getElementById('cookies').textContent = 'Cookie val: ' + parseInt(cookies.value, 10);
-        if (cookies.value) {
-          if (response.ads.length > 1) {
-            var cookies_num = parseInt(cookies.value, 10);
-            if (response.ads.length > cookies_num) {
-              var submit_button = document.createElement('button');
-              submit_button.className = 'btn';
-              submit_button.textContent = 'Send';
-              link_feed.appendChild(submit_button);
-              submit_button.addEventListener('click', function() {
-                chrome.cookies.set({url: 'https://www.facebook.com', name: 'popup', value:response.ads.length.toString()});
-                link_feed.removeChild(submit_button);
+      if (response.ads.length > 1) {
+        chrome.storage.sync.get('num_ads', function(res) {
+          document.getElementById('cookies').textContent = res.num_ads;
+
+          if (response.ads.length > res.num_ads) {
+            var submit_button = document.createElement('button');
+            submit_button.className = 'btn';
+            submit_button.textContent = 'Send';
+            link_feed.appendChild(submit_button);
+            submit_button.addEventListener('click', function() {
+              chrome.storage.sync.set({
+                num_ads: response.ads.length
               });
-            }
-          } else {
-            chrome.cookies.set({url: 'https://www.facebook.com', name: 'popup', value:response.ads.length.toString()});
+              link_feed.removeChild(submit_button);
+            });
           }
-        } else {
-          chrome.cookies.set({url: 'https://www.facebook.com', name: 'popup', value:response.ads.length.toString()});
-        }
-      });
+        });
+      }
     }
   }
 
@@ -73,7 +69,7 @@
       });
   }
 
-  document.addEventListener('load', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     requestLinks();
   });
 
