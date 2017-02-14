@@ -16,10 +16,11 @@
 
       var post_ad_avg = Math.round((response.num_posts - response.ads.length) / response.ads.length);
       var post_ad_avg_text = (post_ad_avg !== 1) ? post_ad_avg + ' organic posts' : post_ad_avg + ' organic post';
-      var ad_avg_el = document.createElement('div');
-      ad_avg_el.className = 'ad_avg';
-      ad_avg_el.textContent = (post_ad_avg !== 'NaN organic posts') ? '1 ad for every ' + post_ad_avg_text : 'No ads loaded yet';
-      link_feed.appendChild(ad_avg_el);
+      // var ad_avg_el = document.createElement('div');
+      // ad_avg_el.className = 'ad_avg';
+      // ad_avg_el.textContent = (post_ad_avg !== 'NaN organic posts') ? '1 ad for every ' + post_ad_avg_text : 'No ads loaded yet';
+      //link_feed.appendChild(ad_avg_el);
+      explainer.textContent = (post_ad_avg !== 'NaN organic posts') ? '1 ad for every ' + post_ad_avg_text : 'No ads loaded yet';
 
       var ad_slots = response.ads;
       var ad_slot_feed_el = document.createElement('div');
@@ -34,7 +35,9 @@
       });
 
       if (response.ads.length > 1) {
-        chrome.storage.sync.get('num_ads', function(res) {
+        chrome.storage.local.get('num_ads', function(res) {
+
+          // TO BE REMOVED. USED TO CHECK STORAGE STATUS
           document.getElementById('cookies').textContent = res.num_ads;
 
           if (response.ads.length > res.num_ads) {
@@ -43,7 +46,7 @@
             submit_button.textContent = 'Send';
             link_feed.appendChild(submit_button);
             submit_button.addEventListener('click', function() {
-              chrome.storage.sync.set({
+              chrome.storage.local.set({
                 num_ads: response.ads.length
               });
               link_feed.removeChild(submit_button);

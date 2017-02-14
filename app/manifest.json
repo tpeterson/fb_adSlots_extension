@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "FB Ad Slots",
+  "name": "Social Ad Spotter",
   "description": "This extension collects the insertion points of ads in a Facebook feed.",
   "version": "1.0",
   "permissions": [
@@ -12,11 +12,11 @@
     "storage"
   ],
   "browser_action": {
-    "default_icon": "/icons/icon_19.png",
+    "default_icon": "/icons/new_icon-19.png",
     "default_popup": "/popup/popup.html"
   },
   "icons": {
-    "128": "/icons/icon_128.png"
+    "128": "/icons/new_icon-128.png"
   },
   "background": {
     "scripts": ["background.js"],
