@@ -1,15 +1,10 @@
 'use strict';
 
-// chrome.runtime.onMessage.addListener(function(msg, sender, response) {
-//   if ((msg.from === 'popup') && (msg.subject === 'getLinks')) {
-//     var returned_links = getLinks(msg.url);
-//     response(returned_links);
-//   }
-// });
-
 if (document.URL.includes('facebook.com')) {
   if (document.getElementById('mainContainer')) {
-    chrome.storage.local.set({num_ads: 0});
+    chrome.storage.local.set({
+      num_ads: 0
+    });
     document.addEventListener('scroll', function() {
       var feed_info = getLinks(document.URL);
       var num_ads = (feed_info !== 'Not Facebook') ? feed_info.ads.length.toString() : '0';
@@ -104,8 +99,6 @@ function checkIfFacebook(url) {
 }
 
 function getLinks(url) {
-  // var link = document.URL;
-  // && checkIfFacebook(link)
   var isFb = checkIfFacebook(url);
   if (isFb) {
     return get_FbAdLinks();
