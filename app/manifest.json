@@ -8,7 +8,6 @@
     "activeTab",
     "tabs",
     "https://www.facebook.com/*",
-    "cookies",
     "storage"
   ],
   "browser_action": {
@@ -24,7 +23,7 @@
   },
   "content_scripts": [{
     "matches": ["https://www.facebook.com/*"],
-    "js": ["content_script.js", "/modules/parseURI.js", "/modules/get_FbAdLinks.js"],
+    "js": ["content_script.js"],
     "run_at": "document_idle",
     "all_frames": true
   }]

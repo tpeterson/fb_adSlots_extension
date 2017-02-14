@@ -10,8 +10,10 @@
     } else if (!response.ads || response.ads.length === 0) {
       explainer.textContent = 'Scroll down or reload Facebook to see ad positions.';
     } else {
-      while (link_feed.firstChild) {
-        link_feed.removeChild(link_feed.firstChild);
+      if (link_feed.children.length > 0) {
+        while (link_feed.firstChild) {
+          link_feed.removeChild(link_feed.firstChild);
+        }
       }
 
       var post_ad_avg = Math.round((response.num_posts - response.ads.length) / response.ads.length);
@@ -30,7 +32,7 @@
       ad_slots.forEach(function(entry) {
         var ad_slot_el = document.createElement('div');
         ad_slot_el.className = 'ad_slot';
-        ad_slot_el.textContent = 'Ad ' + ((entry.advertiser.length > 0) ? 'from ' + entry.advertiser : '') + (entry.isPlaced ? ' in slot #' + entry.placement : ' doesn\'t have a slot # yet');
+        ad_slot_el.textContent = 'Ad ' + ((entry.advertiser.length > 0) ? 'from ' + entry.advertiser : '') + (entry.isPlaced ? ' in slot #' + entry.placement : ' not processed yet');
         ad_slot_feed_el.appendChild(ad_slot_el);
       });
 
@@ -87,8 +89,6 @@
           setText('Not Facebook');
         }
       });
-
-
   }
 
   document.addEventListener('DOMContentLoaded', function() {
