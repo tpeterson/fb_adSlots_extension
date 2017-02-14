@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Social Ad Spotter",
-  "description": "This extension collects the insertion points of ads in a Facebook feed.",
+  "description": "This extension tracks the ads inserted in a social feed.",
   "version": "1.0",
   "permissions": [
     "activeTab",

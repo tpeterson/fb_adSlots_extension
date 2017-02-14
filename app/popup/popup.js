@@ -7,7 +7,7 @@
 
     if (!response || (response === 'Not Facebook')) {
       explainer.textContent = 'Visit Facebook to see ad insertion positions';
-    } else if (response.ads.length === 0) {
+    } else if (!response.ads || response.ads.length === 0) {
       explainer.textContent = 'Scroll down or reload Facebook to see ad positions.';
     } else {
       while (link_feed.firstChild) {
@@ -73,10 +73,22 @@
     //     }, setText);
     //   });
 
-      chrome.runtime.sendMessage({
-        from: 'popup',
-        subject: 'sendAds',
-      }, setText);
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true//,
+        // lastFocusedWindow: true
+      }, function(tabs) {
+        if (tabs[0].url.includes('facebook.com')) {
+          chrome.runtime.sendMessage({
+            from: 'popup',
+            subject: 'sendAds',
+          }, setText);
+        } else {
+          setText('Not Facebook');
+        }
+      });
+
+
   }
 
   document.addEventListener('DOMContentLoaded', function() {

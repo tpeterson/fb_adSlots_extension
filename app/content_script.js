@@ -20,12 +20,12 @@ function getLinks(url) {
   }
 }
 
-chrome.runtime.onMessage.addListener(function(msg, sender, response) {
-  if ((msg.from === 'popup') && (msg.subject === 'getLinks')) {
-    var returned_links = getLinks(msg.url);
-    response(returned_links);
-  }
-});
+// chrome.runtime.onMessage.addListener(function(msg, sender, response) {
+//   if ((msg.from === 'popup') && (msg.subject === 'getLinks')) {
+//     var returned_links = getLinks(msg.url);
+//     response(returned_links);
+//   }
+// });
 
 if (document.URL.includes('facebook.com')) {
   if (document.getElementById('mainContainer')) {
