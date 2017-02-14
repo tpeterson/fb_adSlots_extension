@@ -25,7 +25,7 @@
       var ad_slots = response.ads;
       var ad_slot_feed_el = document.createElement('div');
       ad_slot_feed_el.id = 'ad_slot_feed';
-      link_feed.appendChild(ad_slot_feed_el);
+      // link_feed.appendChild(ad_slot_feed_el);
 
       ad_slots.forEach(function(entry) {
         var ad_slot_el = document.createElement('div');
@@ -33,6 +33,8 @@
         ad_slot_el.textContent = 'Ad ' + ((entry.advertiser.length > 0) ? 'from ' + entry.advertiser : '') + (entry.isPlaced ? ' in slot #' + entry.placement : ' isn\'t placed yet');
         ad_slot_feed_el.appendChild(ad_slot_el);
       });
+
+      link_feed.appendChild(ad_slot_feed_el);
 
       if (response.ads.length > 1) {
         chrome.storage.local.get('num_ads', function(res) {
