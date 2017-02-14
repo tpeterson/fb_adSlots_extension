@@ -30,7 +30,7 @@
       ad_slots.forEach(function(entry) {
         var ad_slot_el = document.createElement('div');
         ad_slot_el.className = 'ad_slot';
-        ad_slot_el.textContent = 'Ad ' + ((entry.advertiser.length > 0) ? 'from ' + entry.advertiser : '') + (entry.isPlaced ? ' in slot #' + entry.placement : ' isn\'t placed yet');
+        ad_slot_el.textContent = 'Ad ' + ((entry.advertiser.length > 0) ? 'from ' + entry.advertiser : '') + (entry.isPlaced ? ' in slot #' + entry.placement : ' doesn\'t have a slot # yet');
         ad_slot_feed_el.appendChild(ad_slot_el);
       });
 
@@ -60,18 +60,23 @@
   }
 
   function requestLinks() {
-    chrome.tabs.query({
-        active: true,
-        currentWindow: true,
-        lastFocusedWindow: true
-      },
-      function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {
-          from: 'popup',
-          subject: 'getLinks',
-          url: tabs[0].url
-        }, setText);
-      });
+    // chrome.tabs.query({
+    //     active: true,
+    //     currentWindow: true//,
+    //     // lastFocusedWindow: true
+    //   },
+    //   function(tabs) {
+    //     chrome.tabs.sendMessage(tabs[0].id, {
+    //       from: 'popup',
+    //       subject: 'getLinks',
+    //       url: tabs[0].url
+    //     }, setText);
+    //   });
+
+      chrome.runtime.sendMessage({
+        from: 'popup',
+        subject: 'sendAds',
+      }, setText);
   }
 
   document.addEventListener('DOMContentLoaded', function() {

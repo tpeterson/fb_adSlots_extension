@@ -36,7 +36,8 @@ if (document.URL.includes('facebook.com')) {
       chrome.runtime.sendMessage({
         from: 'content_script',
         subject: 'postLinks',
-        badge_num: num_ads
+        badge_num: num_ads,
+        ad_data: feed_info
       });
     });
   }
