@@ -19,9 +19,12 @@
         }
       }
       // CALCULATE AD LOAD AND PRESENT IN POPUP
-      var post_ad_avg = Math.round((response.num_posts - response.ads.length) / response.ads.length);
+      var num_organic = response.num_posts - response.ads.length;
+      var num_ads = response.ads.length;
+      var post_ad_avg = Math.round(num_organic / num_ads);
       var post_ad_avg_text = (post_ad_avg !== 1) ? post_ad_avg + ' organic posts' : post_ad_avg + ' organic post';
       explainer.textContent = (post_ad_avg !== 'NaN organic posts') ? '1 ad for every ' + post_ad_avg_text : 'No ads loaded yet';
+      document.getElementById('ads_posts_num').textContent = num_ads + ((num_ads !== 1) ? ' ads & ' : ' ad & ') + num_organic + ((num_organic !== 1) ? ' organic posts' : ' organic post');
       // CREATE ITEMIZED LIST OF ADS
       var ad_slots = response.ads;
       var ad_slot_feed_el = document.createElement('div');
@@ -42,21 +45,21 @@
           document.getElementById('storage_status').textContent = '# of ads last time you submitted to database: ' + res.num_ads;
           // CLEAR ELEMENT THAT INFORMS WHY SEND BUTTON HAS BEEN REMOVED
           var send_div = document.getElementById('send_stats');
-          send_stats.textContent = '';
+          send_div.textContent = '';
           // CHECK IF NEW ADS HAVE BEEN LOADED SINCE LAST TIME SUBMITTED TO DATABASE
           if (response.ads.length > res.num_ads) {
             // CREATE SUBMIT BUTTON
             var submit_button = document.createElement('button');
             submit_button.className = 'btn';
             submit_button.textContent = 'Submit ad load';
-            send_stats.appendChild(submit_button);
+            send_div.appendChild(submit_button);
             // REMOVE SUBMIT BUTTON EACH TIME DATA IS SUBMITTED TO DATABASE AND UPDATE STORED DATA
             submit_button.addEventListener('click', function() {
               chrome.storage.local.set({
                 num_ads: response.ads.length
               });
-              send_stats.removeChild(submit_button);
-              send_stats.textContent = 'Load more ads to submit again.'
+              send_div.removeChild(submit_button);
+              send_div.textContent = 'Load more ads to submit again.'
             });
           }
         });

@@ -24,10 +24,12 @@ body {
   font-size: 1rem;
   color: #00385B; }
 
-.send_data {
+.tiny_text {
   color: #ffffff;
   text-align: center;
-  font-size: 0.75rem; }
+  font-size: 0.9rem;
+  background-color: #00385B;
+  width: 100%; }
 
 button.btn {
   display: block;

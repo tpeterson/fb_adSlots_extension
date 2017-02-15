@@ -30,10 +30,12 @@ body {
   color: $bg_color;
 }
 
-.send_data {
+.tiny_text {
   color: #ffffff;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
+  background-color: $bg_color;
+  width: 100%;
 }
 
 button.btn {
