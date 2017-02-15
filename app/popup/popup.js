@@ -36,18 +36,22 @@
         chrome.storage.local.get('num_ads', function(res) {
 
           // TO BE REMOVED. USED TO CHECK STORAGE STATUS
-          document.getElementById('cookies').textContent = res.num_ads;
+          document.getElementById('cookies').textContent = '# of ads last time you submitted to database: ' + res.num_ads;
+
+          var send_div = document.getElementById('send_stats');
+          send_stats.textContent = '';
 
           if (response.ads.length > res.num_ads) {
             var submit_button = document.createElement('button');
             submit_button.className = 'btn';
             submit_button.textContent = 'Send';
-            link_feed.appendChild(submit_button);
+            send_stats.appendChild(submit_button);
             submit_button.addEventListener('click', function() {
               chrome.storage.local.set({
                 num_ads: response.ads.length
               });
-              link_feed.removeChild(submit_button);
+              send_stats.removeChild(submit_button);
+              send_stats.textContent = 'Load more ads to submit again.'
             });
           }
         });

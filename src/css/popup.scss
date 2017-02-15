@@ -1,32 +1,47 @@
 $primary_color: #FF8080;
 $secondary_color: #ffffff;
 $bg_color: #00385B;
-
+html {
+  font-size: 16px;
+}
 body {
   width: 250px;
   height: 400px;
   margin: 0;
   background-color: $bg_color;
-  font-size: 16px;
   font-family: "Futura", "Helvetica Neue", "Lucida Grande", sans-serif;
 }
 
 #header {
   width: 100%;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   background-color: $primary_color;
   text-align: center;
-  font-size: 1.25em;
+  font-size: 1.25rem;
   color: $secondary_color;
+}
+
+#explainer {
+  margin: 0.5rem 0.25rem 0.5rem 0.25rem;
+  background-color: #80FFFA;
+  text-align: center;
+  font-size: 1rem;
+  color: $bg_color;
+}
+
+.send_data {
+  color: #ffffff;
+  text-align: center;
+  font-size: 0.75rem;
 }
 
 button.btn {
   display: block;
-  margin: 1em auto;
+  margin: 1rem auto;
   background: $primary_color;
   border: 0;
-  font-size: 0.9em;
+  font-size: 0.9rem;
   font-weight: bold;
   color: $secondary_color;
 }
@@ -42,18 +57,10 @@ button.btn:hover {
 }
 
 .ad_slot {
-  margin: 0.5em 0.625em;
+  margin: 0.5rem 0.625rem;
   border: 2px solid $primary_color;
   background-color: $bg_color;
   text-align: center;
-  font-size: 1em;
+  font-size: 1rem;
   color: $secondary_color;
-}
-
-#explainer, .ad_avg {
-  margin: 0.5em 0.25em 0em 0.25em;
-  background-color: #80FFFA;
-  text-align: center;
-  font-size: 1em;
-  color: $bg_color;
 }
