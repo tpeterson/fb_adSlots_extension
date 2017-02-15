@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha ./test/test.js",
-    "build-css": "sass --watch src/css/popup.scss:app/popup/popup.css"
+    "build-css": "sass --watch src/css/popup.scss:app/css/popup.css"
   },
   "repository": {
     "type": "git",

@@ -8,7 +8,7 @@ const newer = require('gulp-newer');
 
 gulp.task('scripts', function () {
   return gulp.src('src/js/*.js')
-    .pipe(newer('public/js'))
+    .pipe(newer('app/js'))
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(uglify())
@@ -18,7 +18,7 @@ gulp.task('scripts', function () {
 
 gulp.task('styles', function () {
   return gulp.src('src/css/*.scss')
-    .pipe(newer('public/css'))
+    .pipe(newer('app/css'))
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
