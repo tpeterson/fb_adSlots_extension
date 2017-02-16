@@ -3,7 +3,7 @@
 
   "name": "Social Ad Spotter",
   "description": "This extension tracks the ads inserted in a social feed.",
-  "version": "1.0",
+  "version": "1.0.1",
   "permissions": [
     "activeTab",
     "tabs",
