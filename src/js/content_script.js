@@ -1,4 +1,3 @@
-'use strict';
 (function() {
   // CHECK IF CURRENT PAGE IS FACEBOOK
   if (document.URL.includes('facebook.com')) {

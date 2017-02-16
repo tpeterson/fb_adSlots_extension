@@ -1,2 +1,2 @@
-"use strict";var ad_load={};chrome.runtime.onMessage.addListener(function(e,t,o){"content_script"===e.from&&"postLinks"===e.subject&&(ad_load=e.ad_data,chrome.browserAction.setBadgeText({text:e.badge_num}))}),chrome.runtime.onMessage.addListener(function(e,t,o){"popup"===e.from&&"sendAds"===e.subject&&o(ad_load)});
+"use strict";!function(){var e={};chrome.runtime.onMessage.addListener(function(t,n,s){"content_script"===t.from&&"postLinks"===t.subject&&(e=t.ad_data,chrome.browserAction.setBadgeText({text:t.badge_num}))}),chrome.runtime.onMessage.addListener(function(t,n,s){"popup"===t.from&&"sendAds"===t.subject&&s(e)})}();
 //# sourceMappingURL=background.js.map

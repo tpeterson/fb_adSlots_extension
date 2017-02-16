@@ -1,4 +1,3 @@
-'use strict';
 (function() {
   // PRESENT AD/POST DATA IN POPUP
   function setText(response) {
