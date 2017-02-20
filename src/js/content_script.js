@@ -26,7 +26,7 @@
     chrome.storage.local.set({
       num_ads: 0
     });
-    // UPDATE DATA AS FACEBOOK LOADS MORE ADS/POSTS ON SCROLL
+    // UPDATE DATA AS TWITTER LOADS MORE ADS/POSTS ON SCROLL
     document.addEventListener('scroll', function() {
       // PROCESS ADS/POSTS
       var feed_info = getLinks(document.URL);
@@ -41,7 +41,7 @@
       });
     });
   } else {
-    // SET BADGE NUMBER TO 0 IF NOT FACEBOOK
+    // SET BADGE NUMBER TO 0 IF NOT FACEBOOK OR TWITTER
     chrome.runtime.sendMessage({
       from: 'content_script',
       subject: 'postLinks',
