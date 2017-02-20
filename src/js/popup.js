@@ -31,7 +31,7 @@
       ad_slots.forEach(function(entry) {
         var ad_slot_el = document.createElement('div');
         ad_slot_el.className = 'ad_slot';
-        ad_slot_el.textContent = 'Ad ' + ((entry.advertiser.length > 0) ? 'from ' + entry.advertiser : '') + (entry.isPlaced ? ' in slot #' + entry.placement : ' not processed yet');
+        ad_slot_el.textContent = 'Ad ' + ((entry.advertiser.length > 0) ? 'from ' + entry.advertiser : '') + (entry.isPlaced ? ' in slot #' + entry.placement : '');
         ad_slot_feed_el.appendChild(ad_slot_el);
       });
       // ADD ITEMIZED LIST OF ADS TO POPUP
@@ -72,15 +72,15 @@
       active: true,
       currentWindow: true
     }, function(tabs) {
-      // CHECK THAT PAGE IS FACEBOOK
-      if (tabs[0].url.includes('facebook.com')) {
+      // CHECK THAT PAGE IS FACEBOOK OR TWITTER
+      if (tabs[0].url.includes('facebook.com') || tabs[0].url.includes('twitter.com')) {
         // SEND MESSAGE TO EVENT PAGE
         chrome.runtime.sendMessage({
           from: 'popup',
           subject: 'sendAds',
         }, setText);
       } else {
-        // FLAG IF NOT FACEBOOK
+        // FLAG IF NOT FACEBOOK OR TWITTER
         setText(false);
       }
     });

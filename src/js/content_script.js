@@ -21,6 +21,25 @@
         });
       });
     }
+  } else if (document.URL.includes('twitter.com')) {
+    // SET OR RESET STORED DATA TRACKING SUBMISSIONS TO DATABASE
+    chrome.storage.local.set({
+      num_ads: 0
+    });
+    // UPDATE DATA AS FACEBOOK LOADS MORE ADS/POSTS ON SCROLL
+    document.addEventListener('scroll', function() {
+      // PROCESS ADS/POSTS
+      var feed_info = getLinks(document.URL);
+      // PARSE NUMBER OF ADS TO APPEAR IN EXTENSION BADGE
+      var num_ads = feed_info ? feed_info.ads.length.toString() : '0';
+      // SEND DATA TO EVENT PAGE (BACKGROUND.JS)
+      chrome.runtime.sendMessage({
+        from: 'content_script',
+        subject: 'postLinks',
+        badge_num: num_ads,
+        ad_data: feed_info
+      });
+    });
   } else {
     // SET BADGE NUMBER TO 0 IF NOT FACEBOOK
     chrome.runtime.sendMessage({
@@ -98,13 +117,47 @@
     }
     return ad_obj;
   }
+  // PROCESS TWITTER ADS/POSTS
+  function get_TwitterAdLinks() {
+    let timeline = document.querySelector('ol#stream-items-id');
+    let tweets = Array.from(timeline.children).filter(function(item) {
+      if (item.hasAttribute('data-item-type')) {
+        return item.getAttribute('data-item-type') === 'tweet';
+      }
+    });
+
+    let ads = tweets.filter(function(tweet) {
+      return tweet.firstElementChild.classList.contains('promoted-tweet');
+    });
+
+    let ads_arr = ads.map(function(ad) {
+      let ad_tweet = ad.firstElementChild;
+      ad_tweet.style.border = '4px solid #FF8080';
+
+      let ad_info = {
+        advertiser: ad_tweet.getAttribute('data-name') ? ad_tweet.getAttribute('data-name') : 'No name given',
+        isPlaced: (tweets.indexOf(ad) !== -1) ? true : false,
+        placement: tweets.indexOf(ad) + 1
+      }
+      return ad_info;
+    });
+
+    var feed_info = {
+      num_posts: tweets.length,
+      ads: ads_arr
+    };
+
+    return feed_info;
+  }
   // CHECK THAT GETTING LINKS FOR FACEBOOK. WILL BE MODIFIED ONCE TWITTER ADDED TO EXTENSION
-  function checkIfFacebook(url) {
+  function checkDomain(url) {
     // CONVERT LINK INTO OBJECT
     var link = parseUri(url);
     // CHECK THAT LINK IS FOR SECURE FACEBOOK SITE
     if ((link.protocol === 'https') && link.host.includes('facebook.com')) {
-      return true;
+      return 'facebook';
+    } else if ((link.protocol === 'https') && link.host.includes('twitter.com')) {
+      return 'twitter';
     } else {
       return false;
     }
@@ -112,9 +165,11 @@
   // GRAB AD/POST DATA
   function getLinks(url) {
     // VERIFY THAT CHECKING FOR FACEBOOK. WILL BE MODIFIED ONCE TWITTER ADDED
-    var isFb = checkIfFacebook(url);
-    if (isFb) {
+    var domainIs = checkDomain(url);
+    if (domainIs === 'facebook') {
       return get_FbAdLinks();
+    } else if (domainIs === 'twitter') {
+      return get_TwitterAdLinks();
     } else {
       return false;
     }
