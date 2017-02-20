@@ -5,10 +5,10 @@
     var explainer = document.getElementById('explainer');
     // IF NO RESPONSE OR PAGE IS NOT FACEBOOK
     if (!response) {
-      explainer.textContent = 'Visit Facebook to see ad insertion positions';
+      explainer.textContent = 'Visit Facebook or Twitter to see ad insertion positions';
     // IF NO ADS HAVE LOADED ON FACEBOOK YET
     } else if (!response.ads || response.ads.length === 0) {
-      explainer.textContent = 'Scroll down or reload Facebook to see ad positions.';
+      explainer.textContent = 'Scroll down or reload page to see ad positions.';
     // IF ADS HAVE LOADED ON FACEBOOK
     } else {
       // CLEAR ITEMIZED LIST OF ADS FROM LAST TIME

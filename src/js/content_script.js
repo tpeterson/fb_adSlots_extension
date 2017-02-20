@@ -108,7 +108,7 @@
 
     return feed_info;
   }
-  // CONVERT AD DATA INTO OBJECT FOR ITEMIZED LIST IN POPUP
+  // CONVERT FACEBOOK AD DATA INTO OBJECT FOR ITEMIZED LIST IN POPUP
   function processAd(ad, advertiser) {
     const ad_obj = {
       advertiser: advertiser,
@@ -119,17 +119,15 @@
   }
   // PROCESS TWITTER ADS/POSTS
   function get_TwitterAdLinks() {
-    let timeline = document.querySelector('ol#stream-items-id');
-    let tweets = Array.from(timeline.children).filter(function(item) {
-      if (item.hasAttribute('data-item-type')) {
-        return item.getAttribute('data-item-type') === 'tweet';
-      }
-    });
-
+    // GET MAIN FEED
+    let feed = document.querySelector('ol#stream-items-id');
+    // GET ARRAY OF ALL TWEETS IN MAIN FEED
+    let tweets = loadTweetsAndMightLike(feed);
+    // FILTER TWEETS ARRAY FOR ADS
     let ads = tweets.filter(function(tweet) {
       return tweet.firstElementChild.classList.contains('promoted-tweet');
     });
-
+    // PROCESS ADS
     let ads_arr = ads.map(function(ad) {
       let ad_tweet = ad.firstElementChild;
       ad_tweet.style.border = '4px solid #FF8080';
@@ -141,7 +139,7 @@
       }
       return ad_info;
     });
-
+    // CONVERT DATA INTO OBJECT: NUM_POSTS FOR BADGE AND AD LOAD, ADS FOR ITEMIZED LIST IN POPUP
     var feed_info = {
       num_posts: tweets.length,
       ads: ads_arr
@@ -149,7 +147,34 @@
 
     return feed_info;
   }
-  // CHECK THAT GETTING LINKS FOR FACEBOOK. WILL BE MODIFIED ONCE TWITTER ADDED TO EXTENSION
+  // LOAD TWEETS FROM MAIN FEED AND FROM YOU MIGHT LIKE SECTION
+  function loadTweetsAndMightLike(timeline) {
+    // ARRAY TO STORE EACH TWEET
+    let tweets_arr = [];
+    // CHECK TIMELINE FOR TWEETS IN MAIN FEED AND YOU MIGHT LIKE SECTION
+    Array.from(timeline.children).forEach(function(item) {
+      if (item.hasAttribute('data-item-type')) {
+        // CHECK IF MAIN FEED TWEET
+        if (item.getAttribute('data-item-type') === 'tweet') {
+          tweets_arr.push(item);
+        } else {
+          // CHECK IF YOU MIGHT LIKE SECTION
+          if (item.classList.contains('has-recap')) {
+            // GET TWEET FEED FROM YOU MIGHT LIKE SECTION
+            let recap_list = Array.from(item.children).find(function(child) {
+              return child.tagName === 'OL';
+            });
+            // GET TWEETS FROM YOU MIGHT LIKE SECTION
+            Array.from(recap_list.children).forEach(function(tweet) {
+              tweets_arr.push(tweet);
+            });
+          }
+        }
+      }
+    });
+    return tweets_arr;
+  }
+  // CHECK IF GETTING LINKS FOR FACEBOOK OR TWITTER
   function checkDomain(url) {
     // CONVERT LINK INTO OBJECT
     var link = parseUri(url);
@@ -164,7 +189,7 @@
   }
   // GRAB AD/POST DATA
   function getLinks(url) {
-    // VERIFY THAT CHECKING FOR FACEBOOK. WILL BE MODIFIED ONCE TWITTER ADDED
+    // VERIFY THAT CHECKING FOR FACEBOOK OR TWITTER
     var domainIs = checkDomain(url);
     if (domainIs === 'facebook') {
       return get_FbAdLinks();

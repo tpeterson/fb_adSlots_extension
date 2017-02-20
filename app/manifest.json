@@ -9,6 +9,7 @@
     "tabs",
     "https://www.facebook.com/*",
     "https://www.twitter.com/*",
+    "https://*.twitter.com/*",
     "storage"
   ],
   "browser_action": {
@@ -23,7 +24,7 @@
     "persistent": false
   },
   "content_scripts": [{
-    "matches": ["https://www.facebook.com/*", "https://twitter.com/*"],
+    "matches": ["https://www.facebook.com/*", "https://twitter.com/*", "https://*.twitter.com/*"],
     "js": ["/js/content_script.js"],
     "run_at": "document_idle",
     "all_frames": true
